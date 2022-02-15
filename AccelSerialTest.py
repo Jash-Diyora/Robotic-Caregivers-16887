@@ -1,4 +1,4 @@
-#robocare
+
 import time
 import stretch_body.robot
 
