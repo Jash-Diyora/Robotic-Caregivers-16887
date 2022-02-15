@@ -16,10 +16,10 @@ if __name__ == '__main__':
 
         cc=str(ser.readline())
         ccdata=(cc[:4][:])
-        xx = float(ccdata)
-        print(xx)
+        x_axis = float(ccdata)
+        print(x_axis)
 
-        if 8 < xx < 10:
+        if 8 < x_axis < 10:
             print("here")
             robot.base.translate_by(x_m=0.1) 
             robot.push_command()
@@ -27,7 +27,7 @@ if __name__ == '__main__':
             #robot.push_command()
 
 
-        if -8 > xx > -10:
+        if -8 > x_axis > -10:
             print("there")
             robot.base.translate_by(x_m=-0.1) 
             robot.push_command()
