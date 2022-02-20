@@ -5,6 +5,11 @@ import stretch_body.robot
 import serial
 ser = serial.Serial("/dev/ttyUSB3", 115600)
 
+# Gripper values
+# -100 open
+# 50 touch
+#0 just close
+
 # First port to left is usb3 or use lsusb
 if __name__ == '__main__':
 
