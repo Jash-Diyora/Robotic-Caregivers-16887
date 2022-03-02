@@ -5,4 +5,6 @@ Test scripts of Hello Robot's Stretch RE1 for Midterm and Final project during c
 
 
 Test Video 1: Hello Robot base control using accelerometer: https://www.youtube.com/watch?v=XWTVK2XfZJA&feature=youtu.be
+
+
 Test Video 2: Hello Robot Stretch Arm control using accelerometer: https://www.youtube.com/watch?v=w6qfV7sqYaI&ab_channel=JashDiyora
