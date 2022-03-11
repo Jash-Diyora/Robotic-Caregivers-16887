@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+import time
+import stretch_body.robot
+from stretch_body.hello_utils import *
+robot=stretch_body.robot.Robot()
+robot.startup()
+
+v_des=stretch_body.wrist_yaw.WristYaw().params['motion']['default']['vel']
+a_des=stretch_body.wrist_yaw.WristYaw().params['motion']['default']['accel']
+
+while True:
+
+        #Queue new targets to devices
+        robot.end_of_arm.move_to('wrist_yaw', deg_to_rad(-70),v_des, a_des)
+
+        #Synchronized send of new position targets 
+        robot.push_command()
+
+        #Wait for next control cycle
+        time.sleep(0.1)
+	quit()
+
