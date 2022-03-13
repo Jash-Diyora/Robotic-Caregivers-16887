@@ -184,7 +184,6 @@ if __name__ == '__main__':
 
 	if '9' in cc and setflagGripper is True:
 	    mode = 'gripper'
-	    print("I am here fuckers")
 	    os.system('paplay --device=alsa_output.pci-0000_00_1f.3.analog-stereo /home/hello-robot/gripper.ogg')
 	    cc = '0'
 	    setflagGripper = False
