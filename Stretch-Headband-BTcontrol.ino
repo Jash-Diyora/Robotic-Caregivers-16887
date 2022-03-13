@@ -19,8 +19,9 @@ Adafruit_LPS35HW lps35hw = Adafruit_LPS35HW();
 Adafruit_ICM20948 icm;
 Adafruit_Sensor *accel;
 
+bool highflag = true, lowflag = false;
 
-unsigned int pressure = 0;
+unsigned int modeVar = 0;
 
 void setup(void) {
   Serial.begin(9600);
@@ -38,7 +39,7 @@ void setup(void) {
 
   Serial.println("Found LPS35HW (PUFF/SIP) chip");
 
-//----------------------------------------------------------
+  //----------------------------------------------------------
 
   if (!icm.begin_I2C()) {
     // if (!icm.begin_SPI(ICM_CS)) {
@@ -63,7 +64,9 @@ void loop() {
 
   //  Serial.print(a.acceleration.x);
   //  Serial.println(a.acceleration.y);
-  Serial.println(lps35hw.readPressure());
+  //Serial.print(lps35hw.readPressure());
+  //Serial.print(" ");
+  Serial.println(modeVar);
 
   if (a.acceleration.x  >= 8)
   {
@@ -85,20 +88,44 @@ void loop() {
     Bluetooth.write(2); //backward
   }
 
-  else if (lps35hw.readPressure() >= 990)
-
+  else
   {
-    Bluetooth.write(6);
+    Bluetooth.write(5);
   }
 
-  else if (lps35hw.readPressure() <= 950)
+  if (lps35hw.readPressure() >= 990 and highflag == true)
   {
-    Bluetooth.write(7);
+    Serial.println("here");
+    modeVar++;
+    if (modeVar > 5)
+    {
+      modeVar = 4;
+    }
+
+    else
+    {
+      Bluetooth.write(5 + modeVar);
+      //Serial.print(5 + modeVar);
+      highflag = false;
+    }
+  }
+
+  else if (lps35hw.readPressure() <= 950 and lowflag == true)
+  {
+    Serial.println("there");
+    modeVar--;
+    if (modeVar <= 1)
+    {
+      modeVar = 1;
+    }
+    Bluetooth.write(5 + modeVar);
+    //Serial.print(5 + modeVar);
+    lowflag = false;
   }
 
   else
   {
-    Bluetooth.write(5);
+    highflag = true;   lowflag = true;
   }
 
   delay(500);
